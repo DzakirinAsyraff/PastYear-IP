@@ -3,6 +3,7 @@ package Controller;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,7 +42,9 @@ public class ProfileController extends HttpServlet {
 		// get the session attribute
 		String username =  (String) request.getSession().getAttribute("username");
 		String phone =  (String) request.getSession().getAttribute("phone");
-		
+		String address = request.getParameter("address");
+		// create cookie
+		Cookie cookie = new Cookie("address", address);
 		// create a customer object
 		Customer customer = new Customer(
 			username,
@@ -49,7 +52,7 @@ public class ProfileController extends HttpServlet {
 			request.getParameter("gender"),
 			request.getParameter("email"),
 			request.getParameter("payment"),
-			request.getParameter("address"),
+			address,
 			phone,
 			request.getParameterValues("interest")
 		);
