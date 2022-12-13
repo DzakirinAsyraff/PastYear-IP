@@ -45,6 +45,11 @@ public class ProfileController extends HttpServlet {
 		String address = request.getParameter("address");
 		// create cookie
 		Cookie cookie = new Cookie("address", address);
+		// set cookie expiry time
+		cookie.setMaxAge(60*60*24*365);
+		// add cookie to response
+		cookie.setPath("/"); // set path to root
+		response.addCookie(cookie);
 		// create a customer object
 		Customer customer = new Customer(
 			username,
@@ -57,7 +62,7 @@ public class ProfileController extends HttpServlet {
 			request.getParameterValues("interest")
 		);
 		// print a h1 tag with "hello world"
-		response.getWriter().append("<h1>Welcome" + customer.getFullname()+ "</h1><br>");
+		response.getWriter().append("<h1>Welcome " + customer.getFullname()+ "</h1><br>");
 		// print the customer object as response page
 		// should use toString() method
 		response.getWriter().append("<p>User Name:" + customer.getUsername() + "</p><br>");

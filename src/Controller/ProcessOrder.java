@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Model.Item;
+
 /**
  * Servlet implementation class ProcessOrder
  */
@@ -36,16 +38,20 @@ public class ProcessOrder extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		// check request.getParameter("Set1Checkbox") is true or false
-		// if true, add to order
-		// if false, do nothing
-		// check request.getParameter("Set2Checkbox") is true or false
-		// if true, add to order
-		// if false, do nothing
-		// check request.getParameter("Set3Checkbox") is true or false
-		// if true, add to order
-		// if false, do nothing
 		
+		if(request.getParameter("Set1Checkbox") != null) {
+			Item item1 = new Item();
+			item1.setName(request.getParameter("Set1Checkbox"));
+			item1.setSize(request.getParameter("Set1Size"));
+			item1.setQuantity(Integer.parseInt(request.getParameter("Set1Quantity")));
+			
+		}
+		if(request.getParameter("Set2Checkbox") != null) {
+			request.getSession().setAttribute("Set2Checkbox", "checked");
+		}
+		if(request.getParameter("Set3Checkbox") != null) {
+			request.getSession().setAttribute("Set3Checkbox", "checked");
+		}
 	}
 
 }
